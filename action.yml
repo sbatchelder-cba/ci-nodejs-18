@@ -1,0 +1,49 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: action
+name: 'CI NodeJS 18 Build'
+description: 'CI NodeJS 18 Build'
+
+# inputs:
+#   context:
+#     description: 'NodeJS build context'
+#     default: ${{ cloudbees.workspace }}
+#   build-args:
+#     description: 'NodeJS build arguments'
+#     required: false
+#     default: ''
+
+runs:
+  using: composite
+  steps:
+    - id: ci-nodejs18
+      uses: docker://node:18
+      shell: sh
+      run: | 
+        npm version
+
+    - id: nodejs18-package-install
+      uses: docker://node:18
+      shell: sh
+      run: | 
+        npm version
+
+    - id: nodejs18-build
+      uses: docker://node:18
+      shell: sh
+      run: | 
+        npm version
+
+    - id: nodejs18-test
+      uses: docker://node:18
+      shell: sh
+      run: | 
+        npm version
+
+    - id: checkmarx
+      uses: cloudbees-io/checkmarx
+
+    - id: sonarqube
+      uses: cloudbees-io/sonarqube
+
+    - id: kaniko
+      uses: cloudbees-io/kaniko
