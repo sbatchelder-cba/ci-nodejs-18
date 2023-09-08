@@ -85,8 +85,8 @@ runs:
     - id: kaniko
       uses: cloudbees-io/kaniko
       with:
-          dockerfile: $ {{ inputs.DOCKERFILE }}
-          context: $ {{ inputs.CONTEXT }}
-          destination: $ {{ inputs.KANIKO-DESTINATION }}
-          build-args: $ {{ inputs.KANIKO-BUILD-ARGS }}
-          labels: $ {{ inputs.KANIKO-LABELS }}
+          dockerfile: ${{ inputs.DOCKERFILE }}
+          context: ${{ inputs.CONTEXT }}
+          destination: ${{ inputs.KANIKO-DESTINATION }}
+          build-args: ${{ inputs.KANIKO-BUILD-ARGS }}
+          labels: ${{ inputs.KANIKO-LABELS }}
