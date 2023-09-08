@@ -57,22 +57,22 @@ runs:
       run: | 
         npm version
 
-    - id: checkmarx
-      uses: cloudbees-io/checkmarx
-      with:
-          serverURL: "Checkmarx serverURL"
-          username: "Checkmarx username"
-          password: "Checkmarx password"
-          token: ${{ secrets.CHECKMARX_SECRET }}
-          language: "LANGUAGE_YOURCODELANGUAGE"
+    # - id: checkmarx
+    #   uses: cloudbees-io/checkmarx
+    #   with:
+    #       serverURL: "Checkmarx serverURL"
+    #       username: "Checkmarx username"
+    #       password: "Checkmarx password"
+    #       token: ${{ secrets.CHECKMARX_SECRET }}
+    #       language: "LANGUAGE_YOURCODELANGUAGE"
 
-    - id: sonarqube
-      uses: cloudbees-io/sonarqube
-      with:
-          serverURL: "SonarQube server URL"
-          username: "SonarQube username"
-          password: "SonarQube password"
-          language: "LANGUAGE_YOURCODELANGUAGE"
+    # - id: sonarqube
+    #   uses: cloudbees-io/sonarqube
+    #   with:
+    #       serverURL: "SonarQube server URL"
+    #       username: "SonarQube username"
+    #       password: "SonarQube password"
+    #       language: "LANGUAGE_YOURCODELANGUAGE"
 
     - name: Write docker config.json
       uses: docker://alpine:3.18
