@@ -8,7 +8,6 @@ inputs:
     description: ''
     required: false
     default: . 
-  
   DOCKER-CONFIG:
     required: true
     description: 'Docker config.json'
@@ -77,17 +76,17 @@ runs:
     - name: Write docker config.json
       uses: docker://alpine:3.18
       env:
-        DOCKERCONFIGJSON: ${{ secrets.sbatchelder_dockerconfigjson }}
+        DOCKERCONFIGJSON: ${{ inputs.DOCKER-CONFIG }}
       run: | 
         mkdir -p $HOME/.docker
-        echo "$DOCKERCONFIGJSON" > $HOME/.docker/config.json
+        echo "$" > $HOME/.docker/config.json
         cat $HOME/.docker/config.json
 
     - id: kaniko
       uses: cloudbees-io/kaniko
       with:
-          dockerfile: path/to/Dockerfile
-          context: .
-          destination: <registry host>/<image name>:1.0.1,<registry host>/<image name>:latest
-          build-args: BUILDKIT_CONTEXT_KEEP_GIT_DIR=1,BUILDKIT_INLINE_CACHE=1
-          labels: maintainer=John Smith,version=1.0.1
+          dockerfile: $ {{ inputs.DOCKERFILE }}
+          context: $ {{ inputs.CONTEXT }}
+          destination: $ {{ inputs.KANIKO-DESTINATION }}
+          build-args: $ {{ inputs.KANIKO-BUILD-ARGS }}
+          labels: $ {{ inputs.KANIKO-LABELS }}
