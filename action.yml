@@ -79,7 +79,7 @@ runs:
         DOCKERCONFIGJSON: ${{ inputs.DOCKER-CONFIG }}
       run: | 
         mkdir -p $HOME/.docker
-        echo "$" > $HOME/.docker/config.json
+        echo "$DOCKERCONFIGJSON" > $HOME/.docker/config.json
         cat $HOME/.docker/config.json
 
     - id: kaniko
