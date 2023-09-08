@@ -3,14 +3,32 @@ kind: action
 name: 'CI NodeJS 18 Build'
 description: 'CI NodeJS 18 Build'
 
-# inputs:
-#   context:
-#     description: 'NodeJS build context'
-#     default: ${{ cloudbees.workspace }}
-#   build-args:
-#     description: 'NodeJS build arguments'
-#     required: false
-#     default: ''
+inputs:
+  CONTEXT: 
+    description: ''
+    required: false
+    default: . 
+  
+  DOCKER-CONFIG:
+    required: true
+    description: 'Docker config.json'
+  DOCKERFILE: 
+    required: false
+    default: 'Dockerfile'
+    description: ''
+  KANIKO-DESTINATION:
+    description: ''
+    required: true
+  KANIKO-BUILD-ARGS:
+    description: ''
+    required: true
+  KANIKO-LABELS: 
+    description: ''
+    required: true
+  pre-build-args:
+    description: 'NodeJS build arguments'
+    required: false
+    default: ''
 
 runs:
   using: composite
@@ -55,6 +73,15 @@ runs:
           username: "SonarQube username"
           password: "SonarQube password"
           language: "LANGUAGE_YOURCODELANGUAGE"
+
+    - name: Write docker config.json
+      uses: docker://alpine:3.18
+      env:
+        DOCKERCONFIGJSON: ${{ secrets.sbatchelder_dockerconfigjson }}
+      run: | 
+        mkdir -p $HOME/.docker
+        echo "$DOCKERCONFIGJSON" > $HOME/.docker/config.json
+        cat $HOME/.docker/config.json
 
     - id: kaniko
       uses: cloudbees-io/kaniko
